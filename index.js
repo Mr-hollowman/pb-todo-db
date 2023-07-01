@@ -2,9 +2,12 @@ import express from "express";
 import dotenv from 'dotenv'
 import { connect } from "./connect.js";
 import userRoutes from './routes/userRoutes.js'
+import cookieParser from "cookie-parser";
 
 dotenv.config()
-const app = express()
+const app = express();
+
+app.use(cookieParser())
 app.use(express.json())
 
 app.use('/api/v1/users/', userRoutes)
