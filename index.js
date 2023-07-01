@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from 'dotenv'
 import { connect } from "./connect.js";
 import userRoutes from './routes/userRoutes.js'
+import todoRoutes from './routes/todoRoutes.js'
 import cookieParser from "cookie-parser";
 
 dotenv.config()
@@ -11,6 +12,7 @@ app.use(cookieParser())
 app.use(express.json())
 
 app.use('/api/v1/users/', userRoutes)
+app.use('/api/v1/todos/', todoRoutes)
 
 app.use('/', (req, res) => {
     res.send({ message: "welcome to the server" })
