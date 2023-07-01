@@ -15,6 +15,7 @@ app.use('/api/v1/users/', userRoutes)
 app.use('/', (req, res) => {
     res.send({ message: "welcome to the server" })
 })
+
 app.use((err, req, res, next) => {
     const status = err.status || 500
     const message = err.message || "Something went wrong!";
@@ -24,7 +25,6 @@ app.use((err, req, res, next) => {
         message,
     })
 })
-
 
 app.listen(process.env.PORT, () => {
     connect()
