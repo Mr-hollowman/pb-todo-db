@@ -1,11 +1,10 @@
-import mongoose from "mongoose";
 import Users from "../model/Users.js";
 import { ObjectId } from "mongodb";
 export const createTodo = async (req, res, next) => {
     const newTodo = {
         title: req.body.title,
         active: true,
-        id: new ObjectId()
+        id: new ObjectId(),
     }
     try {
         const updates = await Users.findByIdAndUpdate(req.user.id, {
@@ -19,12 +18,15 @@ export const createTodo = async (req, res, next) => {
 
 export const createSubTodo = async (req, res, next) => {
     const newSubTodo = {
-        id: req.body.id,
+        id: new ObjectId(),
         title: req.body.title,
         active: true
     }
 
-    const updates = await Users.findOneAndUpdate(req.user.id, {
-        $push:{}
-    })
+    const updates = await Users.findByIdAndUpdate(req.user.id, {
+        $push: { "todos.$[].subTodo": newSubTodo }
+    }, { new: true })
+
+    console.log(updates)
+    res.send(updates)
 }
