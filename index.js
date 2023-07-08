@@ -11,12 +11,17 @@ const app = express();
 app.use(cookieParser())
 app.use(express.json())
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'https://mr-hollowman.github.io/pb-todo/');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 app.use('/api/v1/users/', userRoutes)
 app.use('/api/v1/todos/', todoRoutes)
 
-app.use('/', (req, res) => {
-    res.send({ message: "welcome to the server" })
-})
 
 app.use((err, req, res, next) => {
     const status = err.status || 500
