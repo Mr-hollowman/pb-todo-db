@@ -8,7 +8,6 @@ import cookieParser from "cookie-parser";
 dotenv.config()
 const app = express();
 
-app.use(cookieParser())
 app.use(express.json())
 
 app.use(function (req, res, next) {
@@ -18,6 +17,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+app.use(cookieParser())
 
 app.use('/api/v1/users/', userRoutes)
 app.use('/api/v1/todos/', todoRoutes)

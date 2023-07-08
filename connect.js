@@ -15,6 +15,7 @@ export const createError = (status, message) => {
 }
 
 export const verifyToken = (req, res, next) => {
+    console.log(req.access_token,"token")
     const token = req.cookies.access_token;
     if (!token) return next(createError(401, "You are not authendicated!"))
 

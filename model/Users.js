@@ -5,8 +5,6 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     img: { type: String, },
-    todos: { type: Array },
-    subTodos: { type: Array }
 }, { timestamps: true })
 
 export default mongoose.model("User", UserSchema)
