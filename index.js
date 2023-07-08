@@ -4,20 +4,12 @@ import { connect } from "./connect.js";
 import userRoutes from './routes/userRoutes.js'
 import todoRoutes from './routes/todoRoutes.js'
 import cookieParser from "cookie-parser";
-
-dotenv.config()
+import cors from 'cors'
 const app = express();
-
-app.use(express.json())
-
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
+dotenv.config()
 app.use(cookieParser())
+app.use(express.json())
+app.use(cors())
 
 app.use('/api/v1/users/', userRoutes)
 app.use('/api/v1/todos/', todoRoutes)

@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const TodoSchema = new mongoose.Schema({
     creator: { type: mongoose.Schema.Types.ObjectId, ref: "Users", require:true },
     title: { type: String, require: true },
-    // id: { type: mongoose.Schema.Types.ObjectId },
     subTodo: { type: Array },
     active: { type: Boolean, require:true }
 }, { timestamps: true })

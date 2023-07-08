@@ -1,4 +1,4 @@
-import Todo from "../model/Todo.js";
+import Todos from "../model/Todo.js";
 import Users from "../model/Users.js";
 import { ObjectId } from "mongodb";
 export const createTodo = async (req, res, next) => {
@@ -33,13 +33,18 @@ export const createSubTodo = async (req, res, next) => {
 }
 
 export const createTodoNew = async (req, res, next) => {
-    const newTodo = new Todo({
-        creator: req.user.id,
-        title: req.body.title,
-        active: true,
-        // id: new ObjectId(),
-        subTodo: []
-    })
-    await newTodo.save()
-    res.status(200).send({ message: "Todo has been created" })
+    try {
+        const newTodo = new Todos({
+            creator: req.user.id,
+            title: req.body.title,
+            active: true,
+            // id: new ObjectId(),
+            subTodo: []
+        })
+        await newTodo.save()
+        res.status(200).send({ message: "Todo has been created" })
+    }
+    catch (error) {
+        next(error)
+    }
 }
